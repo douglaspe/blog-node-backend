@@ -1,14 +1,10 @@
 const router = require('express').Router();
 const mongoose = require('mongoose');
-const swaggerJsDoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
-const swaggerOptions = require('../../swaggerOptions');
 const authMiddleware = require('../middlewares/auth');
+const swagger = require('../../swagger');
 
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
-
-router.use('/docs', swaggerUi.serve);
-router.get('/docs', swaggerUi.setup(swaggerDocs));
+router.use('/docs', swagger.swaggerUi.serve);
+router.get('/docs', swagger.swaggerUi.setup(swagger.swaggerDocs));
 
 const User = mongoose.model('User');
 
