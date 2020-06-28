@@ -1,11 +1,26 @@
 const router = require('express').Router();
 const mongoose = require('mongoose');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+const swaggerOptions = require('../../swaggerOptions');
 const authMiddleware = require('../middlewares/auth');
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+
+router.use('/docs', swaggerUi.serve);
+router.get('/docs', swaggerUi.setup(swaggerDocs));
 
 const User = mongoose.model('User');
 
-router.get('/', async (req, res) => res.json({ message: 'Tudo ok por aqui!' }));
-
+/**
+ * @swagger
+ * /api/register:
+ *  post:
+ *    description: Use para cadastrar novo usuário
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ */
 router.post('/register', async (req, res) => {
   const { email, username } = req.body;
 
@@ -24,6 +39,15 @@ router.post('/register', async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/authenticate:
+ *  post:
+ *    description: Use para autenticar usuário
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ */
 router.post('/authenticate', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -49,6 +73,15 @@ router.post('/authenticate', async (req, res) => {
 
 router.use(authMiddleware);
 
+/**
+ * @swagger
+ * /api/me:
+ *  get:
+ *    description: Use para obter dados do usuário logado
+ *    responses:
+ *      '200':
+ *        description: A successful response
+ */
 router.get('/me', async (req, res) => {
   try {
     const { userId } = req;

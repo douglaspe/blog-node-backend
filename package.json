@@ -4,8 +4,8 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
-    "start": "node src/server.js",
-    "local": "export NODE_ENV=local && nodemon src/server.js"
+    "start": "node server.js",
+    "local": "export NODE_ENV=local && nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +17,9 @@
     "custom-env": "^2.0.1",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.2.1",
-    "mongoose": "^5.9.20"
+    "mongoose": "^5.9.20",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
     "eslint": "^7.3.1",

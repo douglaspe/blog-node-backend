@@ -14,7 +14,7 @@ mongoose.connect(process.env.DATABASE_CONNECTION, {
 });
 
 // Carrega o model de Usuário
-require('./models/user');
+require('./src/models/user');
 
 app.use(bodyParser.json());
 
@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Inicia as rotas da API
-app.use('/api', require('./controllers/userController'));
+app.use('/api', require('./src/controllers/userController'));
 
 console.log('Server rodando na porta', process.env.APP_PORT);
 
